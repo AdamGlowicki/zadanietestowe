@@ -37,13 +37,8 @@ min-width: 100px;
 `
 
 class TableBody extends Component {
-
-    handleClick = (id, ) => {
-    this.props.income()
-    }
-
     render() {
-        const {column1, column2, column3, column4, financial, income} = this.props
+        const {column1, column2, column3, financial} = this.props
         return (
             <>
                 <StyledTableBody>
@@ -51,7 +46,7 @@ class TableBody extends Component {
                         <StyleTh>{column1}</StyleTh>
                         <StyleTd>{column2}</StyleTd>
                         <StyleTd>{column3}</StyleTd>
-                        <StyleTd>{financial ? column4 : <StyleButton onClick={() => income(column1, true)}>Income</StyleButton>}</StyleTd>
+                        {financial || <StyleTd><StyleButton onClick={() => this.props.income(column1, true)}>Income</StyleButton></StyleTd>}
                     </StyleTr>
                 </StyledTableBody>
             </>
@@ -61,10 +56,6 @@ class TableBody extends Component {
 
 const mapDispatchToProps = dispatch => ({
     income: (id, isOpen) => dispatch(getSpecifyIncome(id, isOpen))
-})
-
-const mapStateToProps = ({incoems}) => ({
-
 })
 
 export default connect(null, mapDispatchToProps)(TableBody);

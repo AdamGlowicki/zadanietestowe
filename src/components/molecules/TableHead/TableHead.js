@@ -56,7 +56,7 @@ class TableHead extends Component {
         return (
             <StyledTableHead>
                 <StyleTr>
-                    <StyledTh>{financial ? column1 : <StyledButton onClick={this.handleClick}>#</StyledButton>}</StyledTh>
+                    {financial || <StyledTh><StyledButton onClick={this.handleClick}>#</StyledButton></StyledTh>}
                     <StyledTh>{column2}</StyledTh>
                     <StyledTh>{column3}</StyledTh>
                     <StyledTh>{column4}</StyledTh>

@@ -29,7 +29,7 @@ class Table extends Component {
         const {data, isOpen} = this.props;
         return (
             <>
-                {/*{isOpen && <FinancialTable/>}*/}
+                {isOpen && <FinancialTable/>}
                 <StyledWrapper>
                 <StyledTable>
                     <TableHead column2='Name' column3='City' column4='Income'/>

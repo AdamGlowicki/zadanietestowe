@@ -4,6 +4,7 @@ export const FETCH_COMPANIES_REQUEST = 'FETCH_COMPANIES_REQUEST';
 export const FETCH_COMPANIES_SUCCESS = 'FETCH_COMPANIES_SUCCESS';
 export const FETCH_COMPANIES_FAILURE = 'FETCH_COMPANIES_FAILURE';
 
+export const FETCH_INCOME_REQUEST = 'FETCH_INCOME_REQUEST';
 export const FETCH_INCOME_SUCCESS = 'FETCH_INCOME_SUCCESS';
 export const FETCH_INCOME_FAILURE = 'FETCH_INCOME_FAILURE';
 
@@ -41,13 +42,16 @@ export const sort = (order) => (dispatch) => {
 }
 
 export const getSpecifyIncome = (id, isOpen) => dispatch => {
+    dispatch({ type: FETCH_INCOME_REQUEST });
+
     return axios
         .get(`https://recruitment.hal.skygate.io/incomes/${id}`)
-        .then(({ data }) => {
+        .then(({data}) => {
+            console.log(data)
             dispatch({
                 type: FETCH_INCOME_SUCCESS,
                 payload: {
-                    data,
+                    incomes: data.incomes,
                     isOpen,
                 },
             });
