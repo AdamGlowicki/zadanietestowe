@@ -30,9 +30,8 @@ export const sort = (order) => (dispatch) => {
         dispatch({
             type: SORT,
             payload: {
-                order
+                order: order,
             }
         })
     )
-
 }

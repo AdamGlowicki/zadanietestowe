@@ -17,7 +17,6 @@ const rootReducer = (state = initialState, {type, payload}) => {
             return {
                 ...state,
                 isLoading: false,
-                // data: [...payload.data]
                 data: [...payload.data]
             };
         case SORT:
@@ -29,7 +28,7 @@ const rootReducer = (state = initialState, {type, payload}) => {
             }
             return {
                 ...state,
-                data: [...state.data.sort((a, b) => b.id - a.id)]
+                data: [...state.data.sort((a, b) => b.id - a.id)],
             }
         default:
             return state;

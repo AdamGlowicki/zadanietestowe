@@ -37,16 +37,22 @@ min-width: 200px;
 
 
 class TableHead extends Component {
-    state ={
-
+    state = {
+        isOrder: false
     }
 
+    handleClick = () => {
+    //     this.setState(prevState => ({
+    //         isOrder: !prevState.isOrder
+    //     }));
+        this.props.order(false)
+    }
 
     render() {
         return (
             <StyledTableHead>
                 <StyleTr>
-                    <StyledTh><StyledButton>#</StyledButton></StyledTh>
+                    <StyledTh><StyledButton onClick={this.handleClick}>#</StyledButton></StyledTh>
                     <StyledTh>Name</StyledTh>
                     <StyledTh>City</StyledTh>
                     <StyledTh>Income</StyledTh>
@@ -57,7 +63,7 @@ class TableHead extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-    order: () => dispatch(sort())
+    order: (order) => dispatch(sort())
 })
 
-export default TableHead;
+export default connect(null, mapDispatchToProps)(TableHead);
