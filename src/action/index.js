@@ -47,7 +47,6 @@ export const getSpecifyIncome = (id, isOpen) => dispatch => {
     return axios
         .get(`https://recruitment.hal.skygate.io/incomes/${id}`)
         .then(({data}) => {
-            console.log(data)
             dispatch({
                 type: FETCH_INCOME_SUCCESS,
                 payload: {

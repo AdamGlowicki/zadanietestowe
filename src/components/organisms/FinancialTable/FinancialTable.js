@@ -7,22 +7,21 @@ import {connect} from 'react-redux'
 const StyledWrapper = styled.table`
 padding-top: 30px;;
 position:fixed;
-min-width: 500px;
-min-height: 700px;
+min-height: 300px;
 background-color:red;
-top: 50%;
+top: 100px;
 left: 50%;
-transform: translate(-50%, -50%);
+transform: translate(-50%);
 `
 
 
 class FinancialTable extends Component {
     render() {
+        const {incomes} = this.props
         return (
             <StyledWrapper>
-                <TableHead column1='Income' column2='Average Income' column3='Last Month Income'  financial/>
-                <TableBody financial/>
-                {console.log(getIncome(this.props.incomes))}
+                <TableHead column2='Income' column3='Average Income' column4='Last Month Income'  financial/>
+                <TableBody column1={sunIncome(incomes)} column2={averageIncome(incomes)} column3={sumByLastMonth(incomes)} financial/>
             </StyledWrapper>
         );
     }
@@ -40,4 +39,20 @@ function getIncome(incomes) {
 
 function sunIncome(incomes) {
     return getIncome(incomes).reduce((a, b) => a + b, 0)
+}
+
+function averageIncome(incomes) {
+   return sunIncome(incomes) / incomes.length;
+}
+
+function getByMonth(incomes) {
+    return incomes.filter(item => lastMonthInGivenYear(item.date))
+}
+
+function lastMonthInGivenYear(item) {
+    return (new Date(item).getMonth() +2 === new Date().getMonth()) && (new Date(item).getFullYear() === new Date().getFullYear());
+}
+
+function sumByLastMonth(incomes) {
+    return sunIncome(getByMonth(incomes));
 }
