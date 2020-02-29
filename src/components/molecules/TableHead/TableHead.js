@@ -38,14 +38,14 @@ min-width: 200px;
 
 class TableHead extends Component {
     state = {
-        isOrder: false
+        isOrder: true
     }
 
     handleClick = () => {
-    //     this.setState(prevState => ({
-    //         isOrder: !prevState.isOrder
-    //     }));
-        this.props.order(false)
+        this.setState(prevState => ({
+            isOrder: !prevState.isOrder
+        }));
+        this.props.order(this.state.isOrder)
     }
 
     render() {
@@ -63,7 +63,7 @@ class TableHead extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-    order: (order) => dispatch(sort())
+    order: (order) => dispatch(sort(order))
 })
 
 export default connect(null, mapDispatchToProps)(TableHead);
