@@ -1,19 +1,21 @@
-import { FETCH_SUCCESS, FETCH_REQUEST, SORT} from "../action";
+import { FETCH_COMPANIES_SUCCESS, FETCH_COMPANIES_REQUEST, SORT, FETCH_INCOME_SUCCESS} from "../action";
 
 
 const initialState = {
     data:[],
+    incomes:[],
     isLoading: false,
+    isOpen: true,
 };
 
 const rootReducer = (state = initialState, {type, payload}) => {
     switch (type) {
-        case FETCH_REQUEST:
+        case FETCH_COMPANIES_REQUEST:
             return {
                 ...state,
                 isLoading: true,
             };
-        case FETCH_SUCCESS:
+        case FETCH_COMPANIES_SUCCESS:
             return {
                 ...state,
                 isLoading: false,
@@ -29,6 +31,12 @@ const rootReducer = (state = initialState, {type, payload}) => {
             return {
                 ...state,
                 data: [...state.data.sort((a, b) => b.id - a.id)],
+            }
+        case FETCH_INCOME_SUCCESS:
+            return {
+                ...state,
+                incomes: [...payload.incomes],
+                isOpen: payload.isOpen
             }
         default:
             return state;

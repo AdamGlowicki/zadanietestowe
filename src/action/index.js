@@ -1,27 +1,31 @@
 import axios from 'axios'
 
-export const FETCH_REQUEST = 'FETCH_REQUEST';
-export const FETCH_SUCCESS = 'FETCH_SUCCESS';
-export const FETCH_FAILURE = 'FETCH_FAILURE';
+export const FETCH_COMPANIES_REQUEST = 'FETCH_COMPANIES_REQUEST';
+export const FETCH_COMPANIES_SUCCESS = 'FETCH_COMPANIES_SUCCESS';
+export const FETCH_COMPANIES_FAILURE = 'FETCH_COMPANIES_FAILURE';
+
+export const FETCH_INCOME_SUCCESS = 'FETCH_INCOME_SUCCESS';
+export const FETCH_INCOME_FAILURE = 'FETCH_INCOME_FAILURE';
+
 
 export const SORT = 'SORT';
 
 export const fetchItems = () => (dispatch) => {
-    dispatch({ type: FETCH_REQUEST });
+    dispatch({ type: FETCH_COMPANIES_REQUEST });
 
     return axios
         .get('https://recruitment.hal.skygate.io/companies')
         .then(({ data }) => {
             dispatch({
-                type: FETCH_SUCCESS,
+                type: FETCH_COMPANIES_SUCCESS,
                 payload: {
                     data,
                 },
             });
         })
         .catch(err => {
-            // console.log(err);
-            dispatch({ type: FETCH_FAILURE });
+            console.log(err)
+            dispatch({ type: FETCH_COMPANIES_FAILURE });
         });
 };
 
@@ -30,8 +34,26 @@ export const sort = (order) => (dispatch) => {
         dispatch({
             type: SORT,
             payload: {
-                order: order,
+                order,
             }
         })
     )
+}
+
+export const getSpecifyIncome = (id, isOpen) => dispatch => {
+    return axios
+        .get(`https://recruitment.hal.skygate.io/incomes/${id}`)
+        .then(({ data }) => {
+            dispatch({
+                type: FETCH_INCOME_SUCCESS,
+                payload: {
+                    data,
+                    isOpen,
+                },
+            });
+        })
+        .catch(err => {
+            console.log(err);
+            dispatch({ type: FETCH_INCOME_FAILURE });
+        });
 }

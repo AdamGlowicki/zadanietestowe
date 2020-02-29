@@ -18,8 +18,10 @@ const StyledButton = styled.button`
 `
 
 const StyledTh = styled(Th)`
+justify-content: flex-start;
 :nth-child(1) {
-min-width: 100px;
+min-width: 70px;
+justify-content: center;
 }
 
 :nth-child(2) {
@@ -31,7 +33,8 @@ min-width: 200px;
 }
 
 :nth-child(4) {
-min-width: 200px;
+min-width: 100px;
+justify-content: flex-end;
 }
 `
 
@@ -49,13 +52,14 @@ class TableHead extends Component {
     }
 
     render() {
+        const {column1, column2, column3, column4, financial} = this.props
         return (
             <StyledTableHead>
                 <StyleTr>
-                    <StyledTh><StyledButton onClick={this.handleClick}>#</StyledButton></StyledTh>
-                    <StyledTh>Name</StyledTh>
-                    <StyledTh>City</StyledTh>
-                    <StyledTh>Income</StyledTh>
+                    <StyledTh>{financial ? column1 : <StyledButton onClick={this.handleClick}>#</StyledButton>}</StyledTh>
+                    <StyledTh>{column2}</StyledTh>
+                    <StyledTh>{column3}</StyledTh>
+                    <StyledTh>{column4}</StyledTh>
                 </StyleTr>
             </StyledTableHead>
         );
