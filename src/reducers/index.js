@@ -4,6 +4,7 @@ import {
     SORT,
     FETCH_INCOME_SUCCESS,
     FETCH_INCOME_REQUEST,
+    CLOSE
 } from "../action";
 
 
@@ -49,6 +50,12 @@ const rootReducer = (state = initialState, {type, payload}) => {
                 isLoading: false,
                 incomes: [...payload.incomes],
                 isOpen: true
+            }
+        case CLOSE:
+            console.log('wchodze tu')
+            return {
+                ...state,
+                isOpen: false,
             }
         default:
             return state;

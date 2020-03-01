@@ -10,7 +10,8 @@
     "react-dom": "^16.13.0",
     "react-scripts": "3.4.0",
     "redux": "^4.0.5",
-    "axios": "latest"
+    "axios": "latest",
+    "prop-types": "latest"
   },
   "scripts": {
     "start": "react-scripts start",

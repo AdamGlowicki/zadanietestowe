@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import styled from "styled-components";
+import styled, {css} from "styled-components";
 import Th from "../../atom/Th/Th";
 import {connect} from "react-redux";
 import {sort} from '../../../action'
-
+import PropTypes from 'prop-types'
 const StyledTableHead = styled.tbody`
 display: flex;
 `;
@@ -18,6 +18,7 @@ const StyledButton = styled.button`
 `
 
 const StyledTh = styled(Th)`
+display: flex;
 justify-content: flex-start;
 :nth-child(1) {
 min-width: 70px;
@@ -36,7 +37,28 @@ min-width: 200px;
 min-width: 100px;
 justify-content: flex-end;
 }
-${
+
+ ${({ secondary }) =>
+    secondary &&
+    css`
+      :nth-child(1) {
+min-width: 200px;
+justify-content: flex-start;
+padding-left: 10px;
+}
+
+:nth-child(2) {
+min-width: 200px;
+justify-content: flex-start;
+padding-left: 10px;
+}
+
+:nth-child(3) {
+min-width: 200px;
+justify-content: flex-start;
+padding-left: 10px;
+}
+    `}
 `
 
 
@@ -53,14 +75,14 @@ class TableHead extends Component {
     }
 
     render() {
-        const {column1, column2, column3, column4, financial} = this.props
+        const { column2, column3, column4, financial} = this.props
         return (
             <StyledTableHead>
                 <StyleTr>
                     {financial || <StyledTh><StyledButton onClick={this.handleClick}>#</StyledButton></StyledTh>}
-                    <StyledTh>{column2}</StyledTh>
-                    <StyledTh>{column3}</StyledTh>
-                    <StyledTh>{column4}</StyledTh>
+                    {financial ? <StyledTh secondary>{column2}</StyledTh> : <StyledTh >{column2}</StyledTh>}
+                    {financial ? <StyledTh secondary>{column3}</StyledTh> : <StyledTh >{column3}</StyledTh>}
+                    {financial ? <StyledTh secondary>{column4}</StyledTh> : <StyledTh >{column4}</StyledTh>}
                 </StyleTr>
             </StyledTableHead>
         );
@@ -72,3 +94,7 @@ const mapDispatchToProps = dispatch => ({
 })
 
 export default connect(null, mapDispatchToProps)(TableHead);
+
+TableHead.propTypes = {
+    column2: PropTypes.s
+}

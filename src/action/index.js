@@ -8,8 +8,8 @@ export const FETCH_INCOME_REQUEST = 'FETCH_INCOME_REQUEST';
 export const FETCH_INCOME_SUCCESS = 'FETCH_INCOME_SUCCESS';
 export const FETCH_INCOME_FAILURE = 'FETCH_INCOME_FAILURE';
 
-
 export const SORT = 'SORT';
+export const CLOSE= 'CLOSE'
 
 export const fetchItems = () => (dispatch) => {
     dispatch({ type: FETCH_COMPANIES_REQUEST });
@@ -41,7 +41,7 @@ export const sort = (order) => (dispatch) => {
     )
 }
 
-export const getSpecifyIncome = (id, isOpen) => dispatch => {
+export const getSpecifyIncome = (id) => dispatch => {
     dispatch({ type: FETCH_INCOME_REQUEST });
 
     return axios
@@ -51,7 +51,6 @@ export const getSpecifyIncome = (id, isOpen) => dispatch => {
                 type: FETCH_INCOME_SUCCESS,
                 payload: {
                     incomes: data.incomes,
-                    isOpen,
                 },
             });
         })
@@ -59,4 +58,12 @@ export const getSpecifyIncome = (id, isOpen) => dispatch => {
             console.log(err);
             dispatch({ type: FETCH_INCOME_FAILURE });
         });
+}
+
+export const closeWindow = () => (dispatch) => {
+    return (
+        dispatch({
+            type: CLOSE
+        })
+    )
 }

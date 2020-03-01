@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import styled from "styled-components";
+import styled, {css} from "styled-components";
 import Th from "../../atom/Th/Th";
 import Td from "../../atom/Td/Td";
 import {connect} from 'react-redux'
@@ -23,6 +23,13 @@ const StyleTh = styled(Th)`
 min-width: 70px;
 justify-content: flex-end;
 padding: 0 20px 0 0 ;
+
+${({secondary}) => 
+secondary && css`
+min-width: 200px;
+justify-content: flex-start;
+padding-left: 10px;
+`}
 `
 
 const StyleTd = styled(Td)`
@@ -34,6 +41,20 @@ min-width: 300px;
 justify-content: flex-end;
 min-width: 100px;
 }
+${({secondary}) =>
+    secondary && css`
+:nth-of-type(1) {
+min-width: 200px;
+justify-content: flex-start;
+padding-left: 10px;
+}
+:nth-last-of-type(1) {
+min-width: 200px;
+justify-content: flex-start;
+padding-left: 10px;
+}
+`}
+
 `
 
 class TableBody extends Component {
@@ -43,10 +64,10 @@ class TableBody extends Component {
             <>
                 <StyledTableBody>
                     <StyleTr>
-                        <StyleTh>{column1}</StyleTh>
-                        <StyleTd>{column2}</StyleTd>
-                        <StyleTd>{column3}</StyleTd>
-                        {financial || <StyleTd><StyleButton onClick={() => this.props.income(column1, true)}>Income</StyleButton></StyleTd>}
+                        {financial ? <StyleTh secondary>{column1}</StyleTh> : <StyleTh>{column1}</StyleTh>}
+                        {financial ? <StyleTd secondary>{column2}</StyleTd> : <StyleTd>{column2}</StyleTd>}
+                        {financial ? <StyleTd secondary>{column3}</StyleTd> : <StyleTd>{column3}</StyleTd>}
+                        {financial || <StyleTd><StyleButton onClick={() => this.props.income(column1)}>Income</StyleButton></StyleTd>}
                     </StyleTr>
                 </StyledTableBody>
             </>
@@ -55,7 +76,7 @@ class TableBody extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-    income: (id, isOpen) => dispatch(getSpecifyIncome(id, isOpen))
+    income: (id) => dispatch(getSpecifyIncome(id))
 })
 
 export default connect(null, mapDispatchToProps)(TableBody);

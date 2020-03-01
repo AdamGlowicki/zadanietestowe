@@ -6,6 +6,7 @@ display: flex;
 justify-content: center;
 align-items: center;
 color: black;
+min-width: 100px;
 `;
 
 export default Th
