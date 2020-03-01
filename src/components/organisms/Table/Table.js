@@ -5,6 +5,7 @@ import TableBody from "../../molecules/TableBody/TableBody";
 import {fetchItems} from "../../../action";
 import {connect} from 'react-redux'
 import FinancialTable from "../FinancialTable/FinancialTable";
+import PropTypes from 'prop-types'
 
 const StyledWrapper = styled.div`
 display: flex;
@@ -54,5 +55,17 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Table);
+
+Table.propTypes = {
+    isOpen: PropTypes.bool,
+    data: PropTypes.arrayOf(
+        PropTypes.shape({
+            id: PropTypes.number.isRequired,
+            name: PropTypes.string.isRequired,
+            city: PropTypes.string.isRequired,
+        })
+    )
+
+}
 
 

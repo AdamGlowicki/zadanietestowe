@@ -2,8 +2,9 @@ import styled from "styled-components";
 import React, {Component} from 'react';
 import TableHead from "../../molecules/TableHead/TableHead";
 import TableBody from "../../molecules/TableBody/TableBody";
-import {connect} from 'react-redux'
-import {closeWindow} from '../../../action'
+import {connect} from 'react-redux';
+import {closeWindow} from '../../../action';
+import PropTypes from "prop-types";
 
 const StyledWrapper = styled.div`
 padding-top: 30px;;

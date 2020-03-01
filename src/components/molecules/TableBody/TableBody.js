@@ -4,6 +4,7 @@ import Th from "../../atom/Th/Th";
 import Td from "../../atom/Td/Td";
 import {connect} from 'react-redux'
 import {getSpecifyIncome} from "../../../action";
+import PropTypes from "prop-types";
 
 const StyledTableBody = styled.tbody`
 display: flex;
@@ -29,6 +30,7 @@ secondary && css`
 min-width: 200px;
 justify-content: flex-start;
 padding-left: 10px;
+font-weight: normal;
 `}
 `
 
@@ -80,3 +82,13 @@ const mapDispatchToProps = dispatch => ({
 })
 
 export default connect(null, mapDispatchToProps)(TableBody);
+
+TableBody.propTypes = {
+    financial: PropTypes.bool,
+    secondary: PropTypes.bool,
+}
+
+TableBody.defaultProps = {
+    financial: false,
+    secondary: false,
+}

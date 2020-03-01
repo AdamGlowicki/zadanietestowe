@@ -96,5 +96,14 @@ const mapDispatchToProps = dispatch => ({
 export default connect(null, mapDispatchToProps)(TableHead);
 
 TableHead.propTypes = {
-    column2: PropTypes.s
+    column2: PropTypes.string.isRequired,
+    column3: PropTypes.string.isRequired,
+    column4: PropTypes.string.isRequired,
+    financial: PropTypes.bool,
+    secondary: PropTypes.bool,
+}
+
+TableHead.defaultProps = {
+    financial: false,
+    secondary: false,
 }

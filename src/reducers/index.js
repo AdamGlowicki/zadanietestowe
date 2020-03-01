@@ -52,7 +52,6 @@ const rootReducer = (state = initialState, {type, payload}) => {
                 isOpen: true
             }
         case CLOSE:
-            console.log('wchodze tu')
             return {
                 ...state,
                 isOpen: false,
