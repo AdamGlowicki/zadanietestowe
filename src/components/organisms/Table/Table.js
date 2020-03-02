@@ -6,6 +6,9 @@ import {fetchItems} from "../../../action";
 import {connect} from 'react-redux'
 import FinancialTable from "../FinancialTable/FinancialTable";
 import PropTypes from 'prop-types'
+import TableSearch from "../../molecules/TableSearch/TableSearch";
+import {filterAction} from "./filterAction";
+
 
 const StyledWrapper = styled.div`
 display: flex;
@@ -22,20 +25,52 @@ align-items: center;
 
 class Table extends Component {
 
+    state = {
+        id: '',
+        concern: '',
+        city: '',
+    }
+
+    handleChange = (e) => {
+        const {name, value} = e.target;
+        this.setState({
+            [name]: value
+        })
+    }
+
+    handleClick = () => {
+        this.setState({
+            id: '',
+            concern: '',
+            city: '',
+        })
+    }
+
     componentDidMount() {
         this.props.fetch();
     }
 
     render() {
         const {data, isOpen} = this.props;
+        let page = 1;
+
+        const filterData = {
+            ...this.state,
+            onChange: this.handleChange,
+            onClick: this.handleClick,
+        }
+
+        const filteredData = filterAction(data, this.state)
+
         return (
             <>
                 {isOpen && <FinancialTable/>}
                 <StyledWrapper>
                 <StyledTable>
-                    <TableHead column2='Name' column3='City' column4='Income'/>
-                    {data.map(({id, name, city}) => (
-                        <TableBody column1={id} column2={name} column3={city} key={id}/>
+                    <TableHead isNumber column2='Concern' column3='City' column4='Income'/>
+                    <TableSearch {...filterData}/>
+                    {filterData.map(({id, name, city}) => (
+                        <TableBody isNumber number={page++} column1={id} column2={name} column3={city} key={id}/>
                     ))}
                 </StyledTable>
                     </StyledWrapper>
@@ -65,7 +100,6 @@ Table.propTypes = {
             city: PropTypes.string.isRequired,
         })
     )
-
 }
 
 

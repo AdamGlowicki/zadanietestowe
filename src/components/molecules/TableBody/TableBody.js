@@ -17,7 +17,6 @@ min-height: 30px;
 `;
 
 const StyleButton = styled.button`
-
 `;
 
 const StyleTh = styled(Th)`
@@ -25,14 +24,18 @@ min-width: 70px;
 justify-content: flex-end;
 padding: 0 20px 0 0 ;
 
-${({secondary}) => 
-secondary && css`
+:nth-child(1) {
+padding-right: 40px;
+}
+
+${({secondary}) => (
+    secondary && css`
 min-width: 200px;
 justify-content: flex-start;
 padding-left: 10px;
 font-weight: normal;
-`}
-`
+`)}
+`;
 
 const StyleTd = styled(Td)`
 min-width: 200px;
@@ -43,29 +46,37 @@ min-width: 300px;
 justify-content: flex-end;
 min-width: 100px;
 }
-${({secondary}) =>
+${({secondary}) => (
     secondary && css`
 :nth-of-type(1) {
 min-width: 200px;
 justify-content: flex-start;
 padding-left: 10px;
 }
+
 :nth-last-of-type(1) {
 min-width: 200px;
 justify-content: flex-start;
 padding-left: 10px;
 }
-`}
+`)}
+`;
 
+const StyleNumbers = styled.div`
+display: flex;
+align-items: flex-start;
 `
+
+
 
 class TableBody extends Component {
     render() {
-        const {column1, column2, column3, financial} = this.props
+        const {isNumber, number, column1, column2, column3, financial} = this.props
         return (
             <>
                 <StyledTableBody>
                     <StyleTr>
+                        {isNumber && <StyleTh><StyleNumbers>{number}</StyleNumbers></StyleTh>}
                         {financial ? <StyleTh secondary>{column1}</StyleTh> : <StyleTh>{column1}</StyleTh>}
                         {financial ? <StyleTd secondary>{column2}</StyleTd> : <StyleTd>{column2}</StyleTd>}
                         {financial ? <StyleTd secondary>{column3}</StyleTd> : <StyleTd>{column3}</StyleTd>}

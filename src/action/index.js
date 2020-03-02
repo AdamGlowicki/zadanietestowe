@@ -9,7 +9,11 @@ export const FETCH_INCOME_SUCCESS = 'FETCH_INCOME_SUCCESS';
 export const FETCH_INCOME_FAILURE = 'FETCH_INCOME_FAILURE';
 
 export const SORT = 'SORT';
-export const CLOSE= 'CLOSE'
+export const CLOSE= 'CLOSE';
+
+export const SET_ID = 'SET_ID';
+export const SET_CONCERN = 'SET_CONCERN';
+export const SET_CITY = 'SET_CITY';
 
 export const fetchItems = () => (dispatch) => {
     dispatch({ type: FETCH_COMPANIES_REQUEST });
@@ -64,6 +68,39 @@ export const closeWindow = () => (dispatch) => {
     return (
         dispatch({
             type: CLOSE
+        })
+    )
+}
+
+export const setId = (id) => (dispatch) => {
+    return(
+        dispatch({
+            type: SET_ID,
+            payload: {
+                id
+            }
+        })
+    )
+}
+
+export const setConcern = (concern) => (dispatch) => {
+    return(
+        dispatch({
+            type: SET_CONCERN,
+            payload: {
+                concern
+            }
+        })
+    )
+}
+
+export const setCity = (city) => (dispatch) => {
+    return(
+        dispatch({
+            type: SET_CITY,
+            payload: {
+                city
+            }
         })
     )
 }

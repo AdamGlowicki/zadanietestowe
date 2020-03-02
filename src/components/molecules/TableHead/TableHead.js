@@ -4,8 +4,10 @@ import Th from "../../atom/Th/Th";
 import {connect} from "react-redux";
 import {sort} from '../../../action'
 import PropTypes from 'prop-types'
+
 const StyledTableHead = styled.tbody`
 display: flex;
+flex-direction: column;
 `;
 
 const StyleTr = styled.tr`
@@ -20,40 +22,44 @@ const StyledButton = styled.button`
 const StyledTh = styled(Th)`
 display: flex;
 justify-content: flex-start;
-:nth-child(1) {
+
+:first-child{
+min-width: 70px;
+}
+:nth-child(2) {
 min-width: 70px;
 justify-content: center;
 }
 
-:nth-child(2) {
+:nth-child(3) {
 min-width: 300px;
 }
 
-:nth-child(3) {
+:nth-child(4) {
 min-width: 200px;
 }
 
-:nth-child(4) {
+:nth-child(5) {
 min-width: 100px;
 justify-content: flex-end;
 }
 
- ${({ secondary }) =>
+ ${({secondary}) =>
     secondary &&
     css`
-      :nth-child(1) {
+:nth-last-child(3) {
 min-width: 200px;
 justify-content: flex-start;
 padding-left: 10px;
 }
 
-:nth-child(2) {
+:nth-last-child(2) {
 min-width: 200px;
 justify-content: flex-start;
 padding-left: 10px;
 }
 
-:nth-child(3) {
+:nth-last-child(1) {
 min-width: 200px;
 justify-content: flex-start;
 padding-left: 10px;
@@ -75,14 +81,15 @@ class TableHead extends Component {
     }
 
     render() {
-        const { column2, column3, column4, financial} = this.props
+        const {isNumber, column2, column3, column4, financial} = this.props
         return (
             <StyledTableHead>
                 <StyleTr>
+                    {isNumber && <StyledTh>Number</StyledTh>}
                     {financial || <StyledTh><StyledButton onClick={this.handleClick}>#</StyledButton></StyledTh>}
-                    {financial ? <StyledTh secondary>{column2}</StyledTh> : <StyledTh >{column2}</StyledTh>}
-                    {financial ? <StyledTh secondary>{column3}</StyledTh> : <StyledTh >{column3}</StyledTh>}
-                    {financial ? <StyledTh secondary>{column4}</StyledTh> : <StyledTh >{column4}</StyledTh>}
+                    {financial ? <StyledTh secondary>{column2}</StyledTh> : <StyledTh>{column2}</StyledTh>}
+                    {financial ? <StyledTh secondary>{column3}</StyledTh> : <StyledTh>{column3}</StyledTh>}
+                    {financial ? <StyledTh secondary>{column4}</StyledTh> : <StyledTh>{column4}</StyledTh>}
                 </StyleTr>
             </StyledTableHead>
         );
