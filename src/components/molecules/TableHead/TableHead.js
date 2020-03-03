@@ -63,7 +63,7 @@ min-width: 200px;
 justify-content: flex-start;
 padding-left: 10px;
 }
-    `}
+`}
 `;
 
 class TableHead extends Component {

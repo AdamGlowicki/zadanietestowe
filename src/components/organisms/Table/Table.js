@@ -71,7 +71,6 @@ class Table extends Component {
                         ))}
                     </StyledTable>
                 </StyledWrapper>
-
             </>
         );
     }

@@ -67,7 +67,6 @@ display: flex;
 align-items: flex-start;
 `
 
-
 class TableBody extends Component {
     render() {
         const {isNumber, number, column1, column2, column3, financial} = this.props
