@@ -7,14 +7,13 @@ import {connect} from 'react-redux'
 import FinancialTable from "../FinancialTable/FinancialTable";
 import PropTypes from 'prop-types'
 import TableSearch from "../../molecules/TableSearch/TableSearch";
-import {filter, filterAction, filterObject} from "./filterAction";
-
+import {filter} from "./filterAction";
 
 const StyledWrapper = styled.div`
 display: flex;
 flex-direction: row;
 justify-content: center;
-`
+`;
 
 const StyledTable = styled.table`
 display: flex;
@@ -24,7 +23,6 @@ align-items: center;
 `;
 
 class Table extends Component {
-
     state = {
         id: '',
         concern: '',
@@ -65,14 +63,14 @@ class Table extends Component {
             <>
                 {isOpen && <FinancialTable/>}
                 <StyledWrapper>
-                <StyledTable>
-                    <TableHead isNumber column2='Concern' column3='City' column4='Income'/>
-                    <TableSearch {...filterData}/>
-                    {filtered.map(({id, name, city}) => (
-                        <TableBody isNumber number={page++} column1={id} column2={name} column3={city} key={id}/>
-                    ))}
-                </StyledTable>
-                    </StyledWrapper>
+                    <StyledTable>
+                        <TableHead isNumber column2='Concern' column3='City' column4='Income'/>
+                        <TableSearch {...filterData}/>
+                        {filtered.map(({id, name, city}) => (
+                            <TableBody isNumber number={page++} column1={id} column2={name} column3={city} key={id}/>
+                        ))}
+                    </StyledTable>
+                </StyledWrapper>
 
             </>
         );
@@ -100,5 +98,3 @@ Table.propTypes = {
         })
     )
 }
-
-

@@ -8,19 +8,17 @@ export const FETCH_INCOME_REQUEST = 'FETCH_INCOME_REQUEST';
 export const FETCH_INCOME_SUCCESS = 'FETCH_INCOME_SUCCESS';
 export const FETCH_INCOME_FAILURE = 'FETCH_INCOME_FAILURE';
 
-export const SORT = 'SORT';
-export const CLOSE= 'CLOSE';
-
-export const SET_ID = 'SET_ID';
-export const SET_CONCERN = 'SET_CONCERN';
-export const SET_CITY = 'SET_CITY';
+export const SORT_ID = 'SORT_ID';
+export const SORT_CONCERN = 'SORT_CONCERN';
+export const SORT_CITY = 'SORT_CITY';
+export const CLOSE = 'CLOSE';
 
 export const fetchItems = () => (dispatch) => {
-    dispatch({ type: FETCH_COMPANIES_REQUEST });
+    dispatch({type: FETCH_COMPANIES_REQUEST});
 
     return axios
         .get('https://recruitment.hal.skygate.io/companies')
-        .then(({ data }) => {
+        .then(({data}) => {
             dispatch({
                 type: FETCH_COMPANIES_SUCCESS,
                 payload: {
@@ -30,14 +28,14 @@ export const fetchItems = () => (dispatch) => {
         })
         .catch(err => {
             console.log(err)
-            dispatch({ type: FETCH_COMPANIES_FAILURE });
+            dispatch({type: FETCH_COMPANIES_FAILURE});
         });
 };
 
-export const sort = (order) => (dispatch) => {
+export const sort = (order, type) => (dispatch) => {
     return (
         dispatch({
-            type: SORT,
+            type: type,
             payload: {
                 order,
             }
@@ -46,7 +44,7 @@ export const sort = (order) => (dispatch) => {
 }
 
 export const getSpecifyIncome = (id) => dispatch => {
-    dispatch({ type: FETCH_INCOME_REQUEST });
+    dispatch({type: FETCH_INCOME_REQUEST});
 
     return axios
         .get(`https://recruitment.hal.skygate.io/incomes/${id}`)
@@ -60,7 +58,7 @@ export const getSpecifyIncome = (id) => dispatch => {
         })
         .catch(err => {
             console.log(err);
-            dispatch({ type: FETCH_INCOME_FAILURE });
+            dispatch({type: FETCH_INCOME_FAILURE});
         });
 }
 
@@ -68,39 +66,6 @@ export const closeWindow = () => (dispatch) => {
     return (
         dispatch({
             type: CLOSE
-        })
-    )
-}
-
-export const setId = (id) => (dispatch) => {
-    return(
-        dispatch({
-            type: SET_ID,
-            payload: {
-                id
-            }
-        })
-    )
-}
-
-export const setConcern = (concern) => (dispatch) => {
-    return(
-        dispatch({
-            type: SET_CONCERN,
-            payload: {
-                concern
-            }
-        })
-    )
-}
-
-export const setCity = (city) => (dispatch) => {
-    return(
-        dispatch({
-            type: SET_CITY,
-            payload: {
-                city
-            }
         })
     )
 }

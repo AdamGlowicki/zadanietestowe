@@ -1,12 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Table from "../components/organisms/Table/Table";
-import { ThemeProvider } from 'styled-components';
-import { theme } from '../theme/mainTheme';
-import GlobalStyle from "../theme/GlobalStyle";
+import {ThemeProvider} from 'styled-components';
 import {Provider} from "react-redux";
+import {theme} from '../theme/mainTheme';
+import GlobalStyle from "../theme/GlobalStyle";
 import store from "../store";
-
 
 const Root = () => (
     <Provider store={store}>
@@ -16,9 +14,5 @@ const Root = () => (
         </ThemeProvider>
     </Provider>
 );
-
-Root.propTypes = {
-
-};
 
 export default Root;

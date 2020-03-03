@@ -68,7 +68,6 @@ align-items: flex-start;
 `
 
 
-
 class TableBody extends Component {
     render() {
         const {isNumber, number, column1, column2, column3, financial} = this.props
@@ -80,7 +79,8 @@ class TableBody extends Component {
                         {financial ? <StyleTh secondary>{column1}</StyleTh> : <StyleTh>{column1}</StyleTh>}
                         {financial ? <StyleTd secondary>{column2}</StyleTd> : <StyleTd>{column2}</StyleTd>}
                         {financial ? <StyleTd secondary>{column3}</StyleTd> : <StyleTd>{column3}</StyleTd>}
-                        {financial || <StyleTd><StyleButton onClick={() => this.props.income(column1)}>Income</StyleButton></StyleTd>}
+                        {financial ||
+                        <StyleTd><StyleButton onClick={() => this.props.income(column1)}>Income</StyleButton></StyleTd>}
                     </StyleTr>
                 </StyledTableBody>
             </>

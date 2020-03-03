@@ -4,7 +4,6 @@ import styled, {css} from "styled-components";
 import Input from "../../atom/Input/Input";
 import Td from "../../atom/Td/Td";
 
-
 const StyledTableBody = styled.tbody`
 display: flex;
 `;
@@ -30,7 +29,6 @@ justify-content: flex-end;
 `;
 
 const StyledButton = styled.button`
-
 `;
 
 const StyledInput = styled(Input)`
@@ -48,7 +46,7 @@ ${({tertiary}) => (
     tertiary && css`
 width: 200px;
 `)}
-`
+`;
 
 const TableSearch = ({onClick, id, concern, city, ...props}) => {
     return (
@@ -94,8 +92,10 @@ const TableSearch = ({onClick, id, concern, city, ...props}) => {
 }
 
 TableSearch.propTypes = {
-    id: PropTypes.number.isRequired,
-
+    id: PropTypes.string.isRequired,
+    concern: PropTypes.string.isRequired,
+    city: PropTypes.string.isRequired,
+    onClick: PropTypes.func,
 }
 
 export default TableSearch;

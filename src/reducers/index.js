@@ -1,16 +1,15 @@
 import {
-    FETCH_COMPANIES_SUCCESS,
+    CLOSE,
     FETCH_COMPANIES_REQUEST,
-    SORT,
-    FETCH_INCOME_SUCCESS,
+    FETCH_COMPANIES_SUCCESS,
     FETCH_INCOME_REQUEST,
-    CLOSE
+    FETCH_INCOME_SUCCESS, SORT_CITY, SORT_CONCERN,
+    SORT_ID
 } from "../action";
 
-
 const initialState = {
-    data:[],
-    incomes:[],
+    data: [],
+    incomes: [],
     isLoading: false,
     isOpen: false,
 };
@@ -21,19 +20,19 @@ const rootReducer = (state = initialState, {type, payload}) => {
             return {
                 ...state,
                 isLoading: true,
-            };
-            case FETCH_INCOME_REQUEST:
+            }
+        case FETCH_INCOME_REQUEST:
             return {
                 ...state,
                 isLoading: true,
-            };
+            }
         case FETCH_COMPANIES_SUCCESS:
             return {
                 ...state,
                 isLoading: false,
                 data: [...payload.data],
-            };
-        case SORT:
+            }
+        case SORT_ID:
             if (payload.order) {
                 return {
                     ...state,
@@ -43,6 +42,28 @@ const rootReducer = (state = initialState, {type, payload}) => {
             return {
                 ...state,
                 data: [...state.data.sort((a, b) => b.id - a.id)],
+            };
+        case SORT_CONCERN:
+            if (payload.order) {
+                return {
+                    ...state,
+                    data: [...state.data.sort((a, b) => a.name.localeCompare(b.name))],
+                }
+            }
+            return {
+                ...state,
+                data: [...state.data.sort((a, b) => b.name.localeCompare(a.name))],
+            };
+        case SORT_CITY:
+            if (payload.order) {
+                return {
+                    ...state,
+                    data: [...state.data.sort((a, b) => a.city.localeCompare(b.city))],
+                }
+            }
+            return {
+                ...state,
+                data: [...state.data.sort((a, b) => b.city.localeCompare(a.city))],
             }
         case FETCH_INCOME_SUCCESS:
             return {

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import styled, {css} from "styled-components";
 import Th from "../../atom/Th/Th";
 import {connect} from "react-redux";
-import {sort} from '../../../action'
+import {sort, SORT_CITY, SORT_CONCERN, SORT_ID} from '../../../action'
 import PropTypes from 'prop-types'
 
 const StyledTableHead = styled.tbody`
@@ -16,8 +16,7 @@ min-height: 40px;
 `;
 
 const StyledButton = styled.button`
-
-`
+`;
 
 const StyledTh = styled(Th)`
 display: flex;
@@ -65,19 +64,32 @@ justify-content: flex-start;
 padding-left: 10px;
 }
     `}
-`
-
+`;
 
 class TableHead extends Component {
     state = {
-        isOrder: true
+        isOrderId: true,
+        isOrderConcern: true,
+        isOrderCity: true
     }
 
-    handleClick = () => {
+    handleClickId = () => {
         this.setState(prevState => ({
-            isOrder: !prevState.isOrder
+            isOrderId: !prevState.isOrderId
         }));
-        this.props.order(this.state.isOrder)
+        this.props.orderId(this.state.isOrderId, SORT_ID)
+    }
+    handleClickConcern = () => {
+        this.setState(prevState => ({
+            isOrderId: !prevState.isOrderId
+        }));
+        this.props.orderConcern(this.state.isOrderId, SORT_CONCERN)
+    }
+    handleClickCity = () => {
+        this.setState(prevState => ({
+            isOrderId: !prevState.isOrderId
+        }));
+        this.props.orderCity(this.state.isOrderId, SORT_CITY)
     }
 
     render() {
@@ -86,9 +98,9 @@ class TableHead extends Component {
             <StyledTableHead>
                 <StyleTr>
                     {isNumber && <StyledTh>Number</StyledTh>}
-                    {financial || <StyledTh><StyledButton onClick={this.handleClick}>#</StyledButton></StyledTh>}
-                    {financial ? <StyledTh secondary>{column2}</StyledTh> : <StyledTh>{column2}</StyledTh>}
-                    {financial ? <StyledTh secondary>{column3}</StyledTh> : <StyledTh>{column3}</StyledTh>}
+                    {financial || <StyledTh><StyledButton onClick={this.handleClickId}>#</StyledButton></StyledTh>}
+                    {financial ? <StyledTh secondary>{column2}</StyledTh> : <StyledTh><StyledButton onClick={this.handleClickConcern}>{column2}</StyledButton></StyledTh>}
+                    {financial ? <StyledTh secondary>{column3}</StyledTh> : <StyledTh><StyledButton onClick={this.handleClickCity}>{column3}</StyledButton></StyledTh>}
                     {financial ? <StyledTh secondary>{column4}</StyledTh> : <StyledTh>{column4}</StyledTh>}
                 </StyleTr>
             </StyledTableHead>
@@ -97,7 +109,9 @@ class TableHead extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-    order: (order) => dispatch(sort(order))
+    orderId: (order, type) => dispatch(sort(order, type)),
+    orderConcern: (order, type) => dispatch(sort(order, type)),
+    orderCity: (order, type) => dispatch(sort(order, type)),
 })
 
 export default connect(null, mapDispatchToProps)(TableHead);

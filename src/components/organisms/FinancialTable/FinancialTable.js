@@ -14,11 +14,10 @@ min-height: 300px;
 top: 100px;
 left: 50%;
 transform: translate(-50%);
-`
+`;
 
 const StyledTable = styled.table`
-
-`
+`;
 
 const StyledButton = styled.button`
 background-color: white;
@@ -28,7 +27,7 @@ bottom: 30px;
 right: 30px;
 color: red;
 font-size: 20px;
-`
+`;
 
 class FinancialTable extends Component {
     render() {
