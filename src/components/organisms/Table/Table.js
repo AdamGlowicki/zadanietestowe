@@ -7,7 +7,7 @@ import {connect} from 'react-redux'
 import FinancialTable from "../FinancialTable/FinancialTable";
 import PropTypes from 'prop-types'
 import TableSearch from "../../molecules/TableSearch/TableSearch";
-import {filterAction} from "./filterAction";
+import {filter, filterAction, filterObject} from "./filterAction";
 
 
 const StyledWrapper = styled.div`
@@ -59,8 +59,7 @@ class Table extends Component {
             onChange: this.handleChange,
             onClick: this.handleClick,
         }
-
-        const filteredData = filterAction(data, this.state)
+        const filtered = filter(data, this.state)
 
         return (
             <>
@@ -69,7 +68,7 @@ class Table extends Component {
                 <StyledTable>
                     <TableHead isNumber column2='Concern' column3='City' column4='Income'/>
                     <TableSearch {...filterData}/>
-                    {filterData.map(({id, name, city}) => (
+                    {filtered.map(({id, name, city}) => (
                         <TableBody isNumber number={page++} column1={id} column2={name} column3={city} key={id}/>
                     ))}
                 </StyledTable>

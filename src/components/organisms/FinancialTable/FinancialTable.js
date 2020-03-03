@@ -4,7 +4,6 @@ import TableHead from "../../molecules/TableHead/TableHead";
 import TableBody from "../../molecules/TableBody/TableBody";
 import {connect} from 'react-redux';
 import {closeWindow} from '../../../action';
-import PropTypes from "prop-types";
 
 const StyledWrapper = styled.div`
 padding-top: 30px;;
@@ -38,7 +37,7 @@ class FinancialTable extends Component {
             <StyledWrapper>
                 <StyledTable>
                     <TableHead column2='Income' column3='Average Income' column4='Last Month Income' financial/>
-                    <TableBody column1={sunIncome(incomes)} column2={averageIncome(incomes)}
+                    <TableBody column1={sunIncome(incomes).toFixed(2)} column2={averageIncome(incomes)}
                                column3={sumByLastMonth(incomes)} financial/>
                 </StyledTable>
                 <StyledButton onClick={this.props.close}>X</StyledButton>
@@ -62,11 +61,12 @@ function getIncome(incomes) {
 }
 
 function sunIncome(incomes) {
-    return getIncome(incomes).reduce((a, b) => a + b, 0)
+    const sum = getIncome(incomes).reduce((a, b) => a + b, 0)
+    return sum;
 }
 
 function averageIncome(incomes) {
-    return sunIncome(incomes) / incomes.length;
+    return (sunIncome(incomes) / incomes.length).toFixed(2);
 }
 
 function getByMonth(incomes) {
@@ -78,5 +78,5 @@ function lastMonthInGivenYear(item) {
 }
 
 function sumByLastMonth(incomes) {
-    return sunIncome(getByMonth(incomes));
+    return sunIncome(getByMonth(incomes)).toFixed(2);
 }
